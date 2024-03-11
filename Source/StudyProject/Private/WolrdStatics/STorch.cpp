@@ -19,7 +19,7 @@ ASTorch::ASTorch()
 	BodyStaticMeshComponent->SetupAttachment(GetRootComponent());
 	BodyStaticMeshComponent->SetRelativeLocation(FVector(0.f, 0.f, -30.0f));
 	
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BodyStaticMesh(TEXT("/Script/Engine.StaticMesh'/Game/LevelPrototyping/Meshes/SM_Cylinder.SM_Cylinder'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BodyStaticMesh(TEXT("/Script/Engine.StaticMesh'/Game/StarterContent/Architecture/Pillar_50x500.Pillar_50x500'"));
 	if (true == BodyStaticMesh.Succeeded())
 	{
 		BodyStaticMeshComponent->SetStaticMesh(BodyStaticMesh.Object);
@@ -27,7 +27,11 @@ ASTorch::ASTorch()
 	ParticleSystemComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystemComponent"));
 	ParticleSystemComponent->SetupAttachment(GetRootComponent());
 	ParticleSystemComponent->SetRelativeLocation(FVector(0.f, 0.f, 500.f));
-
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleTemplate(TEXT("/Script/Engine.ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
+	if (true == ParticleTemplate.Succeeded())
+	{
+		ParticleSystemComponent->SetTemplate(ParticleTemplate.Object);
+	}
 	PointLightComponent = CreateDefaultSubobject<UPointLightComponent>(TEXT("PointLightComponent"));
 	PointLightComponent->SetupAttachment(GetRootComponent());
 	PointLightComponent->SetRelativeLocation(FVector(0.f, 0.f, 500.f));
